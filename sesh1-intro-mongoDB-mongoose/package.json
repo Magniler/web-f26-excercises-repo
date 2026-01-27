@@ -1,0 +1,24 @@
+{
+  "name": "mongoose-intro-exercises",
+  "version": "1.0.0",
+  "description": "Øvelser til introduktion af Mongoose ODM - WEB-SQL F26",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:book": "vitest run book",
+    "test:author": "vitest run author",
+    "test:review": "vitest run review",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "mongodb-memory-server": "^10.1.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}
