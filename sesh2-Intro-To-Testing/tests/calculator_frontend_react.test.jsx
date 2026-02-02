@@ -189,6 +189,7 @@ describe('useCalculator hook', () => {
   })
 
   it('should perform addition', () => {
+    //TODO: This test fails currently because... reasons. Take a look.
     const { result } = renderHook(() => useCalculator())
     
     act(() => {

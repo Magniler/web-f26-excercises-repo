@@ -7,12 +7,12 @@ Dette projekt er en calculator-app bygget til at lære unit testing med **Vitest
 ```
 sesh2-Intro-To-Testing/
 ├── files/                          # Kildekode (det vi tester)
-│   ├── calculator_backend.js       # Beregningslogik (pure functions)
+│   ├── calculator_backend.ts       # Beregningslogik (pure functions)
 │   ├── calculator_frontend.js      # Vanilla JS DOM-håndtering
 │   └── calculator_frontend_react.jsx  # React komponenter
 ├── tests/                          # Test-filer
-│   ├── setup.js                    # Test setup (køres før tests)
-│   ├── calculator_backend.test.js  # Backend tests
+│   ├── setup.ts                    # Test setup (køres før tests)
+│   ├── calculator_backend.test.ts  # Backend tests (TypeScript)
 │   ├── calculator_frontend.test.js # Vanilla JS tests
 │   └── calculator_frontend_react.test.jsx # React tests
 ├── styles/
@@ -20,7 +20,8 @@ sesh2-Intro-To-Testing/
 ├── index.html                      # Vanilla JS calculator
 ├── index-react.html                # React calculator entry
 ├── main.jsx                        # React app entry point
-├── vite.config.js                  # Vite + Vitest konfiguration
+├── vite.config.ts                  # Vite + Vitest konfiguration
+├── tsconfig.json                   # TypeScript konfiguration
 └── package.json                    # Dependencies
 ```
 
@@ -60,15 +61,16 @@ npm run dev
 
 ## 📝 Øvelser
 
-### Niveau 1: Backend Tests (`calculator_backend.test.js`)
+### Niveau 1: Backend Tests (`calculator_backend.test.ts`)
 
-Start her! Backend-funktionerne er **pure functions** - de er nemme at teste.
+Start her! Backend-funktionerne er **pure functions** skrevet i **TypeScript** - de er nemme at teste.
 
 **Opgaver:**
 1. Tilføj tests for `modulo`, `power`, `squareRoot`, `absolute`
 2. Test edge cases: Hvad sker der med negative tal? Nul? Decimaltal?
 3. Test fejlhåndtering: Hvornår kastes der exceptions?
 4. Test `Calculator` klassen inkl. memory og history
+5. Bemærk TypeScript type annotations - disse hjælper med at sikre korrekt brug
 
 ### Niveau 2: Vanilla JS Frontend Tests (`calculator_frontend.test.js`)
 

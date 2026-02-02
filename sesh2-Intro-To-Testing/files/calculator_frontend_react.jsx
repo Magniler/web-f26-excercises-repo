@@ -23,7 +23,7 @@ import {
   calculatePercentage,
   isValidNumber,
   roundTo
-} from './calculator_backend.js'
+} from './calculator_backend.ts'
 
 // ============================================
 // CUSTOM HOOKS

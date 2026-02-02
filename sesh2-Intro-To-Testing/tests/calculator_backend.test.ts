@@ -11,10 +11,10 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest'
-import { 
-  add, 
-  subtract, 
-  multiply, 
+import {
+  add,
+  subtract,
+  multiply,
   divide,
   modulo,
   power,
@@ -27,7 +27,7 @@ import {
   roundTo,
   isValidNumber,
   parseNumber
-} from '../files/calculator_backend.js'
+} from '../files/calculator_backend'
 
 // Exemple på tests i add funktionen
 
@@ -49,7 +49,7 @@ describe('add', () => {
 // ===========================================
 
 describe('Calculator class', () => {
-  let calc
+  let calc: Calculator
 
   beforeEach(() => {
     // Vi laver en ny instans af Calculator før hver test

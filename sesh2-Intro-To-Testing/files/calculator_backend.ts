@@ -1,45 +1,37 @@
 /**
- * Calculator Backend Module
+ * Calculator Backend Module - TypeScript Version
  */
+
+// ============================================
+// BASIC ARITHMETIC OPERATIONS
+// ============================================
 
 /**
  * Adds two numbers together
- * @param {number} a - First number
- * @param {number} b - Second number
- * @returns {number} The sum of a and b
  */
-export function add(a, b) {
+export function add(a: number, b: number): number {
   return a + b
 }
 
 /**
  * Subtracts the second number from the first
- * @param {number} a - First number
- * @param {number} b - Second number
- * @returns {number} The difference (a - b)
  */
-export function subtract(a, b) {
+export function subtract(a: number, b: number): number {
   return a - b
 }
 
 /**
  * Multiplies two numbers
- * @param {number} a - First number
- * @param {number} b - Second number
- * @returns {number} The product of a and b
  */
-export function multiply(a, b) {
+export function multiply(a: number, b: number): number {
   return a * b
 }
 
 /**
  * Divides the first number by the second
- * @param {number} a - Dividend
- * @param {number} b - Divisor
- * @returns {number} The quotient (a / b)
  * @throws {Error} When dividing by zero
  */
-export function divide(a, b) {
+export function divide(a: number, b: number): number {
   if (b === 0) {
     throw new Error('Cannot divide by zero')
   }
@@ -52,12 +44,9 @@ export function divide(a, b) {
 
 /**
  * Calculates the remainder of division (modulo)
- * @param {number} a - Dividend
- * @param {number} b - Divisor
- * @returns {number} The remainder
  * @throws {Error} When dividing by zero
  */
-export function modulo(a, b) {
+export function modulo(a: number, b: number): number {
   if (b === 0) {
     throw new Error('Cannot calculate modulo with zero')
   }
@@ -65,22 +54,17 @@ export function modulo(a, b) {
 }
 
 /**
- * Raises a number to a power i.e 2^3 = 8
- * @param {number} base - The base number
- * @param {number} exponent - The exponent
- * @returns {number} base raised to the power of exponent
+ * Raises a number to a power, i.e. 2^3 = 8
  */
-export function power(base, exponent) {
+export function power(base: number, exponent: number): number {
   return Math.pow(base, exponent)
 }
 
 /**
  * Calculates the square root of a number
- * @param {number} n - The number to find the square root of
- * @returns {number} The square root
  * @throws {Error} When the number is negative
  */
-export function squareRoot(n) {
+export function squareRoot(n: number): number {
   if (n < 0) {
     throw new Error('Cannot calculate square root of negative number')
   }
@@ -89,10 +73,8 @@ export function squareRoot(n) {
 
 /**
  * Calculates the absolute value of a number
- * @param {number} n - The number
- * @returns {number} The absolute value
  */
-export function absolute(n) {
+export function absolute(n: number): number {
   return Math.abs(n)
 }
 
@@ -102,22 +84,16 @@ export function absolute(n) {
 
 /**
  * Calculates a percentage of a number
- * @param {number} value - The base value
- * @param {number} percentage - The percentage to calculate
- * @returns {number} The percentage of the value
  */
-export function calculatePercentage(value, percentage) {
+export function calculatePercentage(value: number, percentage: number): number {
   return (value * percentage) / 100
 }
 
 /**
  * Calculates what percentage one number is of another
- * @param {number} part - The part value
- * @param {number} total - The total value
- * @returns {number} The percentage
  * @throws {Error} When total is zero
  */
-export function getPercentageOf(part, total) {
+export function getPercentageOf(part: number, total: number): number {
   if (total === 0) {
     throw new Error('Cannot calculate percentage of zero')
   }
@@ -125,13 +101,10 @@ export function getPercentageOf(part, total) {
 }
 
 /**
- * Calculates discount price
- * @param {number} originalPrice - The original price
- * @param {number} discountPercent - The discount percentage
- * @returns {number} The discounted price
+ * Calculates discounted price
  * @throws {Error} When discount is negative or greater than 100
  */
-export function applyDiscount(originalPrice, discountPercent) {
+export function applyDiscount(originalPrice: number, discountPercent: number): number {
   if (discountPercent < 0 || discountPercent > 100) {
     throw new Error('Discount must be between 0 and 100')
   }
@@ -140,7 +113,21 @@ export function applyDiscount(originalPrice, discountPercent) {
 }
 
 // ============================================
-// MEMORY / STATE OPERATIONS
+// TYPES AND INTERFACES
+// ============================================
+
+/**
+ * Represents a single operation in the calculator history
+ */
+export interface HistoryEntry {
+  operation: 'add' | 'subtract' | 'multiply' | 'divide' | 'set' | 'clear'
+  value: number
+  result: number
+  timestamp: string
+}
+
+// ============================================
+// CALCULATOR CLASS WITH STATE
 // ============================================
 
 /**
@@ -148,6 +135,10 @@ export function applyDiscount(originalPrice, discountPercent) {
  * This is more complex and requires testing of stateful operations
  */
 export class Calculator {
+  private currentValue: number
+  private memory: number
+  private history: HistoryEntry[]
+
   constructor() {
     this.currentValue = 0
     this.memory = 0
@@ -156,17 +147,15 @@ export class Calculator {
 
   /**
    * Gets the current value
-   * @returns {number}
    */
-  getValue() {
+  getValue(): number {
     return this.currentValue
   }
 
   /**
    * Sets a new value
-   * @param {number} value
    */
-  setValue(value) {
+  setValue(value: number): void {
     this.currentValue = value
     this._addToHistory('set', value)
   }
@@ -174,17 +163,15 @@ export class Calculator {
   /**
    * Clears the current value (resets to 0)
    */
-  clear() {
+  clear(): void {
     this.currentValue = 0
     this._addToHistory('clear', 0)
   }
 
   /**
    * Adds a value to the current value
-   * @param {number} value
-   * @returns {number} The new current value
    */
-  add(value) {
+  add(value: number): number {
     this.currentValue = add(this.currentValue, value)
     this._addToHistory('add', value)
     return this.currentValue
@@ -192,10 +179,8 @@ export class Calculator {
 
   /**
    * Subtracts a value from the current value
-   * @param {number} value
-   * @returns {number} The new current value
    */
-  subtract(value) {
+  subtract(value: number): number {
     this.currentValue = subtract(this.currentValue, value)
     this._addToHistory('subtract', value)
     return this.currentValue
@@ -203,10 +188,8 @@ export class Calculator {
 
   /**
    * Multiplies the current value by a value
-   * @param {number} value
-   * @returns {number} The new current value
    */
-  multiply(value) {
+  multiply(value: number): number {
     this.currentValue = multiply(this.currentValue, value)
     this._addToHistory('multiply', value)
     return this.currentValue
@@ -214,11 +197,9 @@ export class Calculator {
 
   /**
    * Divides the current value by a value
-   * @param {number} value
-   * @returns {number} The new current value
    * @throws {Error} When dividing by zero
    */
-  divide(value) {
+  divide(value: number): number {
     this.currentValue = divide(this.currentValue, value)
     this._addToHistory('divide', value)
     return this.currentValue
@@ -229,36 +210,35 @@ export class Calculator {
   /**
    * Stores current value in memory
    */
-  memoryStore() {
+  memoryStore(): void {
     this.memory = this.currentValue
   }
 
   /**
    * Recalls value from memory
-   * @returns {number} The stored memory value
    */
-  memoryRecall() {
+  memoryRecall(): number {
     return this.memory
   }
 
   /**
    * Adds current value to memory
    */
-  memoryAdd() {
+  memoryAdd(): void {
     this.memory += this.currentValue
   }
 
   /**
    * Subtracts current value from memory
    */
-  memorySubtract() {
+  memorySubtract(): void {
     this.memory -= this.currentValue
   }
 
   /**
    * Clears the memory
    */
-  memoryClear() {
+  memoryClear(): void {
     this.memory = 0
   }
 
@@ -266,31 +246,31 @@ export class Calculator {
 
   /**
    * Gets the operation history
-   * @returns {Array} Array of operation objects
    */
-  getHistory() {
+  getHistory(): HistoryEntry[] {
     return [...this.history]
   }
 
   /**
    * Clears the history
    */
-  clearHistory() {
+  clearHistory(): void {
     this.history = []
   }
 
   /**
    * Undoes the last operation (simple implementation)
-   * @returns {boolean} True if undo was successful
+   * @returns True if undo was successful
    */
-  undo() {
+  undo(): boolean {
     if (this.history.length === 0) {
       return false
     }
-    
+
     // Remove last operation
     const lastOp = this.history.pop()
-    
+    if (!lastOp) return false
+
     // Reverse the operation
     switch (lastOp.operation) {
       case 'add':
@@ -315,15 +295,17 @@ export class Calculator {
         // Can't restore after clear
         break
     }
-    
+
     return true
   }
 
   /**
    * Private method to add operation to history
-   * @private
    */
-  _addToHistory(operation, value) {
+  private _addToHistory(
+    operation: HistoryEntry['operation'],
+    value: number
+  ): void {
     this.history.push({
       operation,
       value,
@@ -339,30 +321,23 @@ export class Calculator {
 
 /**
  * Rounds a number to a specified number of decimal places
- * @param {number} value - The value to round
- * @param {number} decimals - Number of decimal places (default: 2)
- * @returns {number} The rounded value
  */
-export function roundTo(value, decimals = 2) {
+export function roundTo(value: number, decimals: number = 2): number {
   const factor = Math.pow(10, decimals)
   return Math.round(value * factor) / factor
 }
 
 /**
  * Checks if a value is a valid number for calculations
- * @param {*} value - The value to check
- * @returns {boolean} True if value is a valid number
  */
-export function isValidNumber(value) {
+export function isValidNumber(value: unknown): value is number {
   return typeof value === 'number' && !isNaN(value) && isFinite(value)
 }
 
 /**
  * Parses a string to a number, with validation
- * @param {string} str - The string to parse
- * @returns {number|null} The parsed number, or null if invalid
  */
-export function parseNumber(str) {
+export function parseNumber(str: string): number | null {
   const num = parseFloat(str)
   return isValidNumber(num) ? num : null
 }
