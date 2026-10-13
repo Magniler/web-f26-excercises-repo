@@ -1,0 +1,2 @@
+- Remove more of the test-suite such that there are only 2-3 examples of each type of test and of each used vitest funtion in the session pp. The rest should be made into tasks for the students.
+- Make sure that the students are introduced to a lot of the relevant Vitest functions in the presentation
